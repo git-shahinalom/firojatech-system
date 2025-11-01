@@ -1,0 +1,22 @@
+# Use Node.js 18 as base image
+FROM node:18
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json .
+RUN npm install --only=production
+
+# Copy application code (server.js and public folder)
+COPY server.js .
+COPY public/ public/
+
+# Expose port 3000
+EXPOSE 3000
+
+# Set environment variable for port (optional)
+ENV PORT=3000
+
+# Start the application
+CMD ["node", "server.js"]

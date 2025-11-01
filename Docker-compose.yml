@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./public:/app/public
+      - ./server.js:/app/server.js
+      - ./package.json:/app/package.json
