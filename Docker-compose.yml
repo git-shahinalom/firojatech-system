@@ -22,3 +22,5 @@ services:
       - ./public:/app/public
       - ./server.js:/app/server.js
       - ./package.json:/app/package.json
+    environment:
+      - NODE_ENV=development
