@@ -11,6 +11,8 @@ services:
       - ./public:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
+    depends_on:
+      - mysql
 
   node:
     build:
@@ -24,3 +26,22 @@ services:
       - ./package.json:/app/package.json
     environment:
       - NODE_ENV=development
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: firojatech_db
+      MYSQL_USER: firoja
+      MYSQL_PASSWORD: firoja123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # টেবিল অটো তৈরি
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql-data:
