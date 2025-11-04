@@ -2,38 +2,46 @@
 <?php
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-    $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '';
-    $message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
+// শুধু JSON POST ডাটা গ্রহণ করবে (Node.js থেকে)
+$data = json_decode(file_get_contents('php://input'), true);
 
-    // Log form data (for debugging)
-    error_log("Form Data: Name=$name, Email=$email, Message=$message");
-
-    // Here you can add logic to save to a database or send an email
-    echo json_encode(['success' => true, 'message' => 'Form submitted successfully!']);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
-
-
+if (!$data || !isset($data['name']) || !isset($data['email'])) {
+    echo json_encode(['success' => false, 'message' => 'Invalid data']);
+    exit;
 }
 
-header('Content-Type: application/json');
+// ডাটা স্যানিটাইজ
+$name    = htmlspecialchars(trim($data['name']));
+$email   = filter_var(trim($data['email']), FILTER_VALIDATE_EMAIL);
+$message = htmlspecialchars(trim($data['message'] ?? ''));
+$position = htmlspecialchars(trim($data['position'] ?? ''));
+$coverLetter = htmlspecialchars(trim($data['coverLetter'] ?? ''));
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = htmlspecialchars($_POST['name'] ?? '');
-    $email = htmlspecialchars($_POST['email'] ?? '');
-    $message = htmlspecialchars($_POST['message'] ?? '');
-    $position = htmlspecialchars($_POST['position'] ?? '');
-    $coverLetter = htmlspecialchars($_POST['coverLetter'] ?? '');
-
-    error_log("Form Data: Name=$name, Email=$email, Message=$message, Position=$position, CoverLetter=$coverLetter");
-    echo json_encode(['success' => true, 'message' => 'Application submitted successfully!']);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+// ইমেল ভ্যালিডেশন
+if (!$email) {
+    echo json_encode(['success' => false, 'message' => 'Invalid email']);
+    exit;
 }
 
+// ডাটাবেস কানেকশন
+require_once 'db.php';
 
+try {
+    // Contact Form
+    if (!empty($message)) {
+        $stmt = $pdo->prepare("INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)");
+        $stmt->execute([$name, $email, $message]);
+    }
+    // Job Application
+    elseif (!empty($position)) {
+        $stmt = $pdo->prepare("INSERT INTO applications (name, email, position, cover_letter) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$name, $email, $position, $coverLetter]);
+    }
 
+    echo json_encode(['success' => true, 'message' => 'Submitted successfully!']);
+    
+} catch (Exception $e) {
+    error_log("DB Error: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Server error']);
+}
 ?>
-
