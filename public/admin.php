@@ -4,16 +4,22 @@ require_once 'db.php';
 
 // সিম্পল লগইন (পাসওয়ার্ড: admin123)
 if (!isset($_SESSION['admin'])) {
-    if ($_POST['pass'] ?? '' !== 'admin123') {
+
+    if (($_POST['pass'] ?? '') !== 'admin123') {
+
         echo '<form method="POST" style="text-align:center;margin-top:50px;">
                 <h2>Admin Login</h2>
                 <input type="password" name="pass" placeholder="Password" required style="padding:10px;font-size:16px;"><br><br>
                 <button type="submit" style="padding:10px 20px;font-size:16px;">Login</button>
               </form>';
+
         exit;
     }
+
     $_SESSION['admin'] = true;
 }
+
+
 
 // ডিলিট হ্যান্ডলার
 if (isset($_GET['delete_contact'])) {
