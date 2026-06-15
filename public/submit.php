@@ -1,9 +1,17 @@
-
 <?php
 header('Content-Type: application/json');
 
 // শুধু JSON POST ডাটা গ্রহণ করবে (Node.js থেকে)
-$data = json_decode(file_get_contents('php://input'), true);
+// FormData এবং JSON দুটোই handle করবে
+
+$contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+if (strpos($contentType, 'application/json') !== false) {
+    $data = json_decode(file_get_contents('php://input'), true);
+} else {
+    $data = $_POST;
+}
+
+
 
 if (!$data || !isset($data['name']) || !isset($data['email'])) {
     echo json_encode(['success' => false, 'message' => 'Invalid data']);
