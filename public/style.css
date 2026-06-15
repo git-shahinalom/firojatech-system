@@ -361,6 +361,34 @@ footer a:hover {
   text-align: center; /* Center align text */
 }
 
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #2c3e50;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.project-card img {
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.text-gold {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+
+
+
+
 /* Job Vacancy Section */
 
 .job-vacancy .form-control {
@@ -387,3 +415,4 @@ footer a {
 footer a:hover {
   color: #ffd700 !important;
 }
+
