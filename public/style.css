@@ -416,3 +416,175 @@ footer a:hover {
   color: #ffd700 !important;
 }
 
+
+
+
+
+
+/* ===== SUCCESSFUL PROJECTS SECTION ===== */
+section#projects, section.projects, div#projects {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    padding: 60px 0;
+}
+
+.project-card {
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    background: linear-gradient(145deg, #1a1a2e, #16213e) !important;
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1) !important;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.25) !important;
+}
+
+.project-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+}
+
+.project-card:hover .card-img-top {
+    filter: brightness(1);
+}
+
+.project-card .card-body {
+    background: linear-gradient(145deg, #1a1a2e, #16213e) !important;
+    border-top: 2px solid rgba(0, 212, 255, 0.3);
+    padding: 20px !important;
+}
+
+.project-card .card-title {
+    color: #ffd700 !important;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.project-card .card-text {
+    color: #aaa !important;
+    font-size: 0.9rem;
+}
+
+.project-card .btn {
+    background: transparent;
+    border: 1px solid #ffd700;
+    color: #ffd700;
+    border-radius: 25px;
+    padding: 6px 20px;
+    transition: all 0.3s ease;
+}
+
+.project-card .btn:hover {
+    background: #ffd700;
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Section title */
+.projects-title, #projects h2 {
+    background: linear-gradient(90deg, #ffd700, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+
+
+/* ===== ANIMATED BACKGROUND ===== */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+    100% { transform: translateY(0px) rotate(360deg); opacity: 0.3; }
+}
+
+section#projects,
+section.projects,
+div#projects,
+.projects-section {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0d1117, #1a1a2e, #16213e);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating orbs */
+section#projects::before,
+section.projects::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+    animation: floatParticle 10s ease-in-out infinite;
+    pointer-events: none;
+}
+
+
+
+
+
+/* ===== FLOATING PARTICLES ===== */
+.project-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.project-particles span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    animation: floatUp 6s infinite;
+    opacity: 0;
+}
+
+.project-particles span:nth-child(1) { width:10px; height:10px; left:10%; background:rgba(0,212,255,0.4); animation-delay:0s; animation-duration:7s; }
+.project-particles span:nth-child(2) { width:6px; height:6px; left:25%; background:rgba(255,215,0,0.4); animation-delay:1s; animation-duration:5s; }
+.project-particles span:nth-child(3) { width:14px; height:14px; left:40%; background:rgba(138,43,226,0.3); animation-delay:2s; animation-duration:8s; }
+.project-particles span:nth-child(4) { width:8px; height:8px; left:55%; background:rgba(0,212,255,0.3); animation-delay:0.5s; animation-duration:6s; }
+.project-particles span:nth-child(5) { width:12px; height:12px; left:70%; background:rgba(255,215,0,0.3); animation-delay:1.5s; animation-duration:7s; }
+.project-particles span:nth-child(6) { width:6px; height:6px; left:85%; background:rgba(0,255,127,0.4); animation-delay:3s; animation-duration:5s; }
+.project-particles span:nth-child(7) { width:10px; height:10px; left:15%; background:rgba(255,100,100,0.3); animation-delay:2.5s; animation-duration:9s; }
+.project-particles span:nth-child(8) { width:8px; height:8px; left:50%; background:rgba(0,212,255,0.5); animation-delay:4s; animation-duration:6s; }
+.project-particles span:nth-child(9) { width:14px; height:14px; left:75%; background:rgba(255,215,0,0.2); animation-delay:1s; animation-duration:8s; }
+
+@keyframes floatUp {
+    0% { bottom:-20px; opacity:0; transform:scale(0.5); }
+    20% { opacity:1; }
+    80% { opacity:0.6; }
+    100% { bottom:110%; opacity:0; transform:scale(1.2) rotate(180deg); }
+}
+
+/* Cards উপরে থাকবে particles এর */
+.project-card {
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
