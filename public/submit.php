@@ -31,6 +31,19 @@ if (!$email) {
     exit;
 }
 
+
+// reCAPTCHA Verification
+$recaptcha_secret = '6LckDjotAAAAKnKCUVBPEkJUDcGOoyEYtzdZT7W';
+$recaptcha_response = $data['g-recaptcha-response'] ?? $_POST['g-recaptcha-response'] ?? '';
+if (!empty($recaptcha_response)) {
+    $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptcha_secret}&response={$recaptcha_response}");
+    $captcha_result = json_decode($verify, true);
+    if (!$captcha_result['success']) {
+        echo json_encode(['success' => false, 'message' => 'reCAPTCHA verification failed!']);
+        exit;
+    }
+}
+
 // ডাটাবেস কানেকশন
 require_once 'db.php';
 

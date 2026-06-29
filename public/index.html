@@ -13,8 +13,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet" />
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+<div id="progress-bar"></div>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="theme-toggle" onclick="document.body.classList.toggle('light-mode');this.textContent=document.body.classList.contains('light-mode')? '🌙' : '☀️'">☀️</button>
 <!-- Background particles -->
 
 <div class="particles"></div>
@@ -193,7 +197,8 @@
     <input class="form-control mb-2" type="text" name="name" placeholder="Your Name" required />
     <input class="form-control mb-2" type="email" name="email" placeholder="Your Email" required />
     <textarea class="form-control mb-2" name="message" rows="5" placeholder="Describe your project Shortly..." required></textarea>
-    <button type="submit" class="btn btn-warning fw-bold" data-target="php">Send Request</button>
+    <div class="g-recaptcha mb-3" data-sitekey="6LckDjotAAAAANqY9qAReaN1Nesl4m_-yaElNNIS"></div>
+<button type="submit" class="btn btn-warning fw-bold" data-target="php">Send Request</button>
   
   </form>
 </section>
@@ -210,7 +215,8 @@
     <input class="form-control mb-2" type="email" name="email" placeholder="Your Email" required />
     <input class="form-control mb-2" type="text" name="position" placeholder="Desired Position" required />
     <textarea class="form-control mb-2" name="coverLetter" rows="3" placeholder="Cover Letter or Experience" required></textarea>
-    <button class="btn btn-warning fw-bold" type="submit">Apply Now</button>
+    <div class="g-recaptcha mb-3" data-sitekey="6LckDjotAAAAANqY9qAReaN1Nesl4m_-yaElNNIS"></div>
+<button class="btn btn-warning fw-bold" type="submit">Apply Now</button>
   </form>
 </section>
 
@@ -240,6 +246,6 @@
 <!-- Font Awesome for social media icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <!-- Custom JS -->
-<script src="index.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
